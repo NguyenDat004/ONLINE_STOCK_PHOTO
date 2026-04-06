@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import axios from "axios";
+import { getCartApi, removeFromCartApi } from "../api/cartApi";
 import { auth } from "../firebase";
 import { toast } from "react-toastify";
 
@@ -10,29 +11,20 @@ function Cart() {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const fetchCart = async () => {
+    const fetchCartItems = async () => {
       try {
         const user = auth.currentUser;
-        if (!user) return;
-
         const token = await user.getIdToken();
-        const res = await axios.get(
-          `http://localhost:5000/api/cart/${user.uid}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
+        const res = await getCartApi(user.uid, token);
         setCartItems(res.data);
       } catch (err) {
-        console.error("❌ Lỗi khi lấy giỏ hàng:", err);
+        console.error("❌ Lỗi khi tải giỏ hàng:", err);
       }
     };
 
-    fetchCart();
+    fetchCartItems();
   }, []);
+
 
   const handleSelectItem = (photoId) => {
     setSelectedItems((prev) =>
@@ -64,22 +56,22 @@ function Cart() {
     try {
       const user = auth.currentUser;
       const token = await user.getIdToken();
-
-      await axios.delete(
-        `http://localhost:5000/api/cart/${user.uid}/${photoId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
+      await removeFromCartApi(user.uid, photoId, token);
+      toast.success("Đã xóa sản phẩm khỏi giỏ hàng!", {
+        position: "top-right",
+        autoClose: 2000,
+      });
       setCartItems(cartItems.filter((item) => item.photo_id !== photoId));
-      setSelectedItems((prev) => prev.filter((id) => id !== photoId));
+      setSelectedItems(selectedItems.filter((id) => id !== photoId));
     } catch (err) {
-      console.error("❌ Lỗi khi xoá ảnh khỏi giỏ:", err);
+      console.error("❌ Lỗi khi xóa sản phẩm:", err);
+      toast.error("❌ Xóa sản phẩm thất bại. Vui lòng thử lại.", {
+        position: "top-right",
+        autoClose: 2000,
+      });
     }
-  };
+    };
+
 
   // Xóa các sản phẩm đã chọn
   const handleRemoveSelected = async () => {

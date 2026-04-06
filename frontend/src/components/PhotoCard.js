@@ -20,21 +20,6 @@ function PhotoCard({ photo }) {
     checkPhotoStatus();
   }, [photo.id]);
 
-  // ✅ THÊM: Lắng nghe event thanh toán thành công
-  useEffect(() => {
-    const handlePurchaseCompleted = () => {
-      console.log("🔔 Purchase completed event received, rechecking status...");
-      checkPhotoStatus();
-    };
-
-    // Đăng ký lắng nghe event
-    window.addEventListener("purchaseCompleted", handlePurchaseCompleted);
-
-    // Cleanup khi component unmount
-    return () => {
-      window.removeEventListener("purchaseCompleted", handlePurchaseCompleted);
-    };
-  }, [photo.id]);
 
   // ✅ THÊM: Lắng nghe event thanh toán thành công
   useEffect(() => {

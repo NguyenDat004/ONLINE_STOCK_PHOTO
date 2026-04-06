@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PhotoCard from "../components/PhotoCard";
 import axios from "axios";
+import { getAllPhotos } from "../api/photoApi";
 
 function Home() {
   const [photos, setPhotos] = useState([]);
@@ -19,7 +20,7 @@ function Home() {
   const fetchPhotos = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/photos");
+      const res = await getAllPhotos();
       setPhotos(res.data);
     } catch (err) {
       console.error("❌ Lỗi khi tải ảnh:", err);

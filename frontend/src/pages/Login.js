@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginApi } from "../api/authApi";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   signInWithPopup,
 } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -26,9 +26,19 @@ function Login() {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       const token = await user.getIdToken();
-
-      await axios.post("http://localhost:5000/api/auth/google", { token });
-
+  
+      // 🔥 Gửi token về backend
+      await loginApi(token);
+  
+      // 🔥 Lưu localStorage để axios tự gắn token sau này
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          token: token,
+          email: user.email,
+        })
+      );
+  
       toast.success("Đăng nhập Google thành công!", {
         autoClose: 800,
         onClose: () => navigate("/"),
@@ -57,23 +67,34 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formData;
-
+  
     if (!email || !password) {
       toast.error("Vui lòng nhập đầy đủ thông tin.");
       return;
     }
-
+  
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
+  
       const user = userCredential.user;
       const token = await user.getIdToken();
-
-      await axios.post("http://localhost:5000/api/auth/login", { token });
-
+  
+      // 🔥 Gửi token về backend để lưu PostgreSQL
+      await loginApi(token);
+  
+      // 🔥 Lưu localStorage để axios tự gắn Authorization header
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          token: token,
+          email: user.email,
+        })
+      );
+  
       toast.success("Đăng nhập thành công!", {
         autoClose: 500,
         onClose: () => navigate("/"),

@@ -1,4 +1,4 @@
-const admin = require('../config/firebase'); // Firebase Admin SDK
+const admin = require('../config/firebase-admin'); // Firebase Admin SDK
 const pool = require('../config/db'); // Kết nối DB
 
 /**
