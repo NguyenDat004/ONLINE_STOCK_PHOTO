@@ -32,7 +32,9 @@ function Home() {
   // Hàm fetch categories từ database
   const fetchCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/categories");
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/categories`
+      );
       setCategories(["Tất cả", ...res.data.map((cat) => cat.name)]);
     } catch (err) {
       console.error("❌ Lỗi khi tải danh mục:", err);

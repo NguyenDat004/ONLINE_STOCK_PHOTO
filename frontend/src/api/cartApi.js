@@ -1,27 +1,23 @@
 //cartApi.js
-import axios from "axios";
+import axiosClient from "./axiosClient";
 
 export const addToCartApi = (photoId, quantity) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return axios.post("/api/cart/add", { photoId, quantity }, {
-    headers: {
-      Authorization: `Bearer ${user.token}`,
-    },
-  });
+  return axiosClient.post("/cart/add", { photoId, quantity });
 };
 
 export const getCartApi = (userId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return axios.get(`/api/cart/${userId}`, {
-    headers: { Authorization: `Bearer ${user.token}` },
-  });
+  return axiosClient.get(`/cart/${userId}`);
 };
 
 export const removeFromCartApi = (userId, photoId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return axios.delete(`/api/cart/${userId}/${photoId}`, {
-    headers: { Authorization: `Bearer ${user.token}` },
-  });
-};  
+  return axiosClient.delete(`/cart/${userId}/${photoId}`);
+};
 
+export const updateQuantityApi = (userId, photoId, quantity) => {
+  return axiosClient.put(`/cart/${userId}/${photoId}`, { quantity });
+};
+
+export const clearCartApi = (userId) => {
+  return axiosClient.delete(`/cart/clear/${userId}`);
+};
 

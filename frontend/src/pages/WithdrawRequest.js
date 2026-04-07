@@ -23,8 +23,10 @@ function WithdrawRequest() {
         const token = await user.getIdToken();
 
         const res = await axios.get(
-          "http://localhost:5000/api/wallet/balance",
-          { headers: { Authorization: `Bearer ${token}` } }
+          `${process.env.REACT_APP_API_URL}/wallet/balance`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
 
         setBalance(Number(res.data.balance));
@@ -58,7 +60,7 @@ function WithdrawRequest() {
       const token = await user.getIdToken();
 
       await axios.post(
-        "http://localhost:5000/api/withdraw/request",
+        `${process.env.REACT_APP_API_URL}/withdraw/request`,
         {
           amount: Number(amount),
           bank_name: bankName,

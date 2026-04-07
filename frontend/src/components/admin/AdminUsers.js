@@ -23,7 +23,7 @@ const AdminUsers = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/users");
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/users`);
       if (!res.ok) throw new Error("Không thể tải danh sách người dùng");
       const data = await res.json();
       setUsers(data);
@@ -65,7 +65,7 @@ const AdminUsers = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/users/${currentUser.uid}`,
+        `${process.env.REACT_APP_API_URL}/users/${currentUser.uid}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ const AdminUsers = () => {
         avatarData.append("avatar", avatarFile);
 
         const avatarRes = await fetch(
-          `http://localhost:5000/api/users/${currentUser.uid}/avatar`,
+          `${process.env.REACT_APP_API_URL}/users/${currentUser.uid}/avatar`,
           {
             method: "PUT",
             body: avatarData,
@@ -102,7 +102,7 @@ const AdminUsers = () => {
     if (!window.confirm("Bạn có chắc muốn xóa người dùng này?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${uid}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/users/${uid}`, {
         method: "DELETE",
       });
 

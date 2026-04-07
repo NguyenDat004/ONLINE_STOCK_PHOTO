@@ -25,7 +25,6 @@ function Cart() {
     fetchCartItems();
   }, []);
 
-
   const handleSelectItem = (photoId) => {
     setSelectedItems((prev) =>
       prev.includes(photoId)
@@ -70,8 +69,7 @@ function Cart() {
         autoClose: 2000,
       });
     }
-    };
-
+  };
 
   // Xóa các sản phẩm đã chọn
   const handleRemoveSelected = async () => {
@@ -90,14 +88,7 @@ function Cart() {
       // Xóa từng item đã chọn
       await Promise.all(
         selectedItems.map((photoId) =>
-          axios.delete(
-            `http://localhost:5000/api/cart/${user.uid}/${photoId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          )
+          removeFromCartApi(user.uid, photoId, token)
         )
       );
 
@@ -137,7 +128,7 @@ function Cart() {
 
       // Gọi API tạo URL thanh toán VNPay - GỬI selectedPhotoIds
       const res = await axios.post(
-        "http://localhost:5000/api/vnpay/create-payment",
+        `${process.env.REACT_APP_API_URL}/vnpay/create-payment`,
         {
           selectedPhotoIds: selectedItems, // ✅ GỬI DANH SÁCH PHOTO_ID ĐÃ CHỌN
         },

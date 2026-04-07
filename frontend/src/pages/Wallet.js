@@ -21,7 +21,7 @@ function Wallet() {
 
         const token = await user.getIdToken();
         const res = await axios.get(
-          "http://localhost:5000/api/wallet/balance",
+          `${process.env.REACT_APP_API_URL}/wallet/balance`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

@@ -20,7 +20,7 @@ function UserProfile() {
       if (currentUser) {
         try {
           const res = await axios.get(
-            `http://localhost:5000/api/users/${encodeURIComponent(
+            `${process.env.REACT_APP_API_URL}/users/${encodeURIComponent(
               currentUser.email
             )}`
           );
@@ -52,7 +52,7 @@ function UserProfile() {
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/users/${userData.uid}/avatar`,
+        `${process.env.REACT_APP_API_URL}/users/${userData.uid}/avatar`,
         form,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -72,7 +72,7 @@ function UserProfile() {
   const handleSave = async () => {
     try {
       await axios.put(
-        `http://localhost:5000/api/users/${userData.uid}`,
+        `${process.env.REACT_APP_API_URL}/users/${userData.uid}`,
         formData
       );
 

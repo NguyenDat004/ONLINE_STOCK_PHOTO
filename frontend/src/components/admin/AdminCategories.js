@@ -24,7 +24,7 @@ const AdminCategories = () => {
   const fetchCategories = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/categories");
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/categories`);
       if (!res.ok) throw new Error("Không thể tải danh sách danh mục");
 
       const data = await res.json();
@@ -72,7 +72,7 @@ const AdminCategories = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/categories", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/categories`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -97,7 +97,7 @@ const AdminCategories = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/categories/${currentCategory.id}`,
+        `${process.env.REACT_APP_API_URL}/categories/${currentCategory.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -124,9 +124,12 @@ const AdminCategories = () => {
     if (!window.confirm("Bạn có chắc muốn xóa danh mục này?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/categories/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/categories/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (!res.ok) throw new Error("Xóa thất bại");
 

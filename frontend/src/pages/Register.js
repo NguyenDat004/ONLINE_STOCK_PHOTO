@@ -56,7 +56,7 @@ function Register() {
       await updateProfile(user, { displayName: fullName });
       const token = await user.getIdToken();
 
-      await axios.post("http://localhost:5000/api/auth/register", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, {
         token,
         fullName,
         email,
@@ -85,7 +85,7 @@ function Register() {
       const user = result.user;
       const token = await user.getIdToken();
 
-      await axios.post("http://localhost:5000/api/auth/google", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/auth/google`, {
         token,
         fullName: user.displayName,
         email: user.email,

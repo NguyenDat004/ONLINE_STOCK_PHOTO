@@ -19,7 +19,7 @@ function Navbar() {
       if (currentUser) {
         try {
           const res = await axios.get(
-            `http://localhost:5000/api/users/${currentUser.email}`
+            `${process.env.REACT_APP_API_URL}/users/${currentUser.email}`
           );
           setUserData(res.data);
         } catch (err) {

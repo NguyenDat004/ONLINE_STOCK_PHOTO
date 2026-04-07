@@ -20,7 +20,6 @@ function PhotoCard({ photo }) {
     checkPhotoStatus();
   }, [photo.id]);
 
-
   // ✅ THÊM: Lắng nghe event thanh toán thành công
   useEffect(() => {
     const handlePurchaseCompleted = () => {
@@ -53,7 +52,7 @@ function PhotoCard({ photo }) {
       const token = await user.getIdToken();
 
       const response = await axios.get(
-        `http://localhost:5000/api/photos/check-status/${photo.id}/${user.uid}`,
+        `${process.env.REACT_APP_API_URL}/photos/check-status/${photo.id}/${user.uid}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -99,7 +98,7 @@ function PhotoCard({ photo }) {
       const token = await user.getIdToken();
 
       await axios.post(
-        "http://localhost:5000/api/cart/add",
+        `${process.env.REACT_APP_API_URL}/cart/add`,
         {
           userId: user.uid,
           photoId: photo.id,

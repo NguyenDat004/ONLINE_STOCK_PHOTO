@@ -35,7 +35,7 @@ function Checkout() {
 
       const token = await user.getIdToken();
       const response = await axios.get(
-        `http://localhost:5000/api/cart/${user.uid}`,
+        `${process.env.REACT_APP_API_URL}/cart/${user.uid}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -75,7 +75,7 @@ function Checkout() {
 
       // Gửi danh sách giỏ hàng sang VNPay API
       const res = await axios.post(
-        "http://localhost:5000/api/vnpay/create-payment",
+        `${process.env.REACT_APP_API_URL}/vnpay/create-payment`,
         {
           userId: user.uid,
           items: cartItems.map((item) => ({
@@ -108,7 +108,7 @@ function Checkout() {
       const token = await user.getIdToken();
 
       await axios.delete(
-        `http://localhost:5000/api/cart/${user.uid}/${photoId}`,
+        `${process.env.REACT_APP_API_URL}/cart/${user.uid}/${photoId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -132,7 +132,7 @@ function Checkout() {
       const token = await user.getIdToken();
 
       await axios.put(
-        `http://localhost:5000/api/cart/${user.uid}/${photoId}`,
+        `${process.env.REACT_APP_API_URL}/cart/${user.uid}/${photoId}`,
         { quantity: newQuantity },
         {
           headers: { Authorization: `Bearer ${token}` },

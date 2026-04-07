@@ -8,7 +8,7 @@ function WithdrawRequests() {
 
   const loadData = async () => {
     const res = await axios.get(
-      "http://localhost:5000/api/withdraw/admin/list"
+      `${process.env.REACT_APP_API_URL}/withdraw/admin/list`
     );
     setRequests(res.data);
   };
@@ -19,7 +19,7 @@ function WithdrawRequests() {
 
   const updateStatus = async (id, status) => {
     const res = await axios.put(
-      `http://localhost:5000/api/withdraw/admin/update/${id}`,
+      `${process.env.REACT_APP_API_URL}/withdraw/admin/update/${id}`,
       { status }
     );
     toast.success(`Yêu cầu đã được ${status}`);

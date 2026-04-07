@@ -30,7 +30,9 @@ const AdminPhotos = () => {
   const fetchPhotos = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/photos/all-admin");
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/photos/all-admin`
+      );
 
       if (!res.ok) throw new Error("Không thể tải danh sách ảnh");
 
@@ -47,7 +49,7 @@ const AdminPhotos = () => {
   // Lấy danh sách categories từ database
   const fetchCategories = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/categories");
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/categories`);
       if (!res.ok) throw new Error("Không thể tải danh mục");
 
       const data = await res.json();
@@ -103,7 +105,7 @@ const AdminPhotos = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/photos/${editingPhoto.id}`,
+        `${process.env.REACT_APP_API_URL}/photos/${editingPhoto.id}`,
         {
           method: "PUT",
           headers: {
@@ -145,7 +147,7 @@ const AdminPhotos = () => {
     if (!window.confirm("Bạn có chắc muốn xóa ảnh này?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/photos/${id}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/photos/${id}`, {
         method: "DELETE",
       });
 
@@ -166,7 +168,7 @@ const AdminPhotos = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/photos/${id}/approve`,
+        `${process.env.REACT_APP_API_URL}/photos/${id}/approve`,
         {
           method: "PUT",
         }

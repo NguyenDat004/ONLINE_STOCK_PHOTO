@@ -27,7 +27,9 @@ function PhotoDetail() {
   useEffect(() => {
     const fetchPhoto = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/photos/${id}`);
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_URL}/photos/${id}`
+        );
         setPhoto(res.data);
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu ảnh:", error);
@@ -38,7 +40,9 @@ function PhotoDetail() {
 
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/reviews/${id}`);
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_URL}/reviews/${id}`
+        );
         setReviews(res.data);
       } catch (error) {
         console.error("Lỗi khi lấy review:", error);
@@ -51,7 +55,7 @@ function PhotoDetail() {
       if (currentUser) {
         try {
           const res = await axios.get(
-            `http://localhost:5000/api/users/${currentUser.email}`
+            `${process.env.REACT_APP_API_URL}/users/${currentUser.email}`
           );
           setUserData(res.data);
 
@@ -95,7 +99,7 @@ function PhotoDetail() {
 
       const token = await currentUser.getIdToken();
       const response = await axios.get(
-        `http://localhost:5000/api/photos/check-status/${id}/${currentUser.uid}`,
+        `${process.env.REACT_APP_API_URL}/photos/check-status/${id}/${currentUser.uid}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -133,7 +137,7 @@ function PhotoDetail() {
       const userId = auth.currentUser.uid;
 
       await axios.post(
-        "http://localhost:5000/api/cart/add",
+        `${process.env.REACT_APP_API_URL}/cart/add`,
         {
           userId,
           photoId: photo.id,
@@ -221,7 +225,7 @@ function PhotoDetail() {
       const token = await auth.currentUser.getIdToken();
 
       const res = await axios.post(
-        "http://localhost:5000/api/reviews",
+        `${process.env.REACT_APP_API_URL}/reviews`,
         {
           photo_id: id,
           user_id: user.uid,
@@ -251,11 +255,14 @@ function PhotoDetail() {
     try {
       const token = await auth.currentUser.getIdToken();
 
-      await axios.delete(`http://localhost:5000/api/reviews/${reviewId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/reviews/${reviewId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setReviews((prev) => prev.filter((r) => r.review_id !== reviewId));
     } catch (err) {

@@ -33,7 +33,9 @@ const AdminTransactions = () => {
   const fetchTransactions = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/transactions/all");
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/transactions/all`
+      );
 
       if (!res.ok) throw new Error("Không thể tải danh sách đơn hàng");
 
@@ -71,7 +73,7 @@ const AdminTransactions = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/transactions/${transaction.transaction_id}`
+        `${process.env.REACT_APP_API_URL}/transactions/${transaction.transaction_id}`
       );
 
       if (!res.ok) throw new Error("Không thể tải chi tiết đơn hàng");

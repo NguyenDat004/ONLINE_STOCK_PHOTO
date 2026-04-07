@@ -12,7 +12,7 @@ const AdminLayout = () => {
     const loadPending = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/withdraw/admin/list"
+          `${process.env.REACT_APP_API_URL}/withdraw/admin/list`
         );
         const count = res.data.filter((x) => x.status === "pending").length;
         setPendingCount(count);

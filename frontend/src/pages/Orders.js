@@ -21,7 +21,7 @@ function Orders() {
 
       const token = await user.getIdToken();
       const response = await axios.get(
-        `http://localhost:5000/api/transactions/history/${user.uid}`,
+        `${process.env.REACT_APP_API_URL}/transactions/history/${user.uid}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
