@@ -9,7 +9,15 @@ const pool = require("./config/db");
 const admin = require("./config/firebase-admin"); // Firebase Admin SDK
 
 // Middleware xử lý chung
-app.use(cors());
+// ✅ CORS: Cho phép frontend truy cập API
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://your-app.vercel.app"
+  ],
+  credentials: true
+}));
+// ✅ Middleware xác thực Firebase: Kiểm tra token và gắn user info vào req.user
 app.use(express.json());
 
 // ✅ Cho phép truy cập ảnh avatar, ảnh upload từ thư mục "uploads"
