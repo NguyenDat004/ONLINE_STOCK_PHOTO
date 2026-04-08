@@ -1,195 +1,208 @@
-📸 Online Stock Photo Ecommerce Website
+# 📸 Online Stock Photo Ecommerce Website
+
 A full-stack web application that allows photographers to upload, sell and manage stock photos while customers can browse, purchase and download high-quality images.
 
-🔗 Frontend: https://stock-photo-online.vercel.app/
-🔗 Backend API: https://stock-photo-api.onrender.com/
+---
 
-🧑‍💻 Tech Stack
-Frontend
-ReactJS (Create React App)
+## 🔗 Live Demo
 
-React Router
+| Service | Link |
+|---|---|
+| 🌐 Frontend | https://stock-photo-online.vercel.app |
+| ⚙️ Backend API | https://stock-photo-api.onrender.com/ |
 
-Bootstrap
+---
 
-Axios
+## ✨ Main Features
 
+### 👤 Authentication
+- Register / Login with Firebase Authentication
+- Google Login
+- JWT verification on backend
+- Auto create user in PostgreSQL when login
+
+### 🖼 Photo Marketplace
+- Browse all photos
+- Search photos by keyword
+- Filter by category
+- Pagination
+- Photo detail page
+- Upload photos (Cloudinary storage)
+
+### 🛒 Ecommerce System
+- Add to cart
+- Checkout page
+- VNPay payment integration (Sandbox)
+- Download purchased photos
+- Transaction history
+
+### ⭐ Reviews & Ratings
+- Rate photos
+- Comment system
+
+### 🛠 Admin Dashboard
+- Manage users
+- Moderate uploaded photos
+- Approve / edit / delete photos
+- Manage photo categories
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- ReactJS (Create React App)
+- React Router
+- Bootstrap
+- Axios
+- Firebase Authentication
+
+### Backend
+- NodeJS + ExpressJS
+- PostgreSQL (Main Database)
+- Firebase Admin SDK (Token verification)
+- Cloudinary (Image Storage)
+- VNPay Sandbox (Payment Gateway)
+
+### Deployment
+- Frontend → Vercel
+- Backend → Render
+- Database → PostgreSQL Cloud
+
+---
+
+## 🏗 System Architecture
+React Client
+↓
 Firebase Authentication
+↓ (JWT Token)
+Express Backend API
+↓
+PostgreSQL Database
+↘
+Cloudinary (Image Storage)
+### Architecture Overview
 
-Backend
-NodeJS + ExpressJS
+React Client (Vercel)  
+        │  
+        │ Firebase Authentication (JWT Token)  
+        ▼  
+Express Backend API (Render)  
+        │  
+        ├── PostgreSQL → Users / Photos / Orders / Transactions  
+        └── Cloudinary → Image Storage  
 
-PostgreSQL (main database)
+---
 
-Cloudinary (image storage)
+## 📂 Project Structure
 
-Firebase Admin SDK (auth verification)
+ONLINE_STOCK_PHOTO
+│
+├── client/                     # React Frontend
+│   ├── src/
+│   │   ├── pages/              # Home, Login, Register, Upload, Admin...
+│   │   ├── components/         # Navbar, Footer, Cards...
+│   │   ├── api/                # Axios API calls
+│   │   ├── context/            # Auth & Cart global state
+│   │   └── firebase.js         # Firebase configuration
+│   │
+│   └── package.json
+│
+├── server/                     # NodeJS Backend
+│   ├── routes/                 # API routes
+│   ├── controllers/            # Business logic
+│   ├── middleware/             # Firebase auth middleware
+│   ├── config/                 # Cloudinary & DB config
+│   └── index.js
+│
+└── README.md
 
-VNPay Sandbox (payment)
+---
 
-Deployment
-Frontend → Vercel
+## ⚙️ Run Project Locally
 
-Backend → Render
+### 1️⃣ Clone repository
 
-Database → PostgreSQL Cloud
-
-✨ Main Features
-👤 Authentication
-Register / Login with Firebase
-
-Google Login
-
-JWT Token verification on backend
-
-Auto create user in PostgreSQL after login
-
-🖼 Photo Marketplace
-Users can:
-
-Browse photos
-
-Search & filter by category
-
-View photo details
-
-Add to cart
-
-Purchase photos
-
-Download after payment
-
-Photographers can:
-
-Upload photos
-
-Manage uploaded photos
-
-View sales
-
-Admin can:
-
-Manage users
-
-Approve / delete photos
-
-Manage categories
-
-View transactions
-
-🛒 Shopping Cart & Checkout
-Add / remove photos from cart
-
-Checkout multiple photos
-
-Order history saved in database
-
-💳 VNPay Payment Integration
-Create payment URL from backend
-
-Redirect to VNPay Sandbox
-
-Verify return URL signature
-
-Save successful transactions
-
-☁️ Cloudinary Upload
-Images are uploaded to Cloudinary and only URLs are stored in PostgreSQL.
-
-🗄 Database Design
-Main tables:
-
-users
-
-photos
-
-categories
-
-cart
-
-transactions
-
-reviews
-
-⚙️ Environment Variables
-Backend (.env)
-PORT=5000
-DATABASE_URL=your_postgres_url
-
-FIREBASE_PROJECT_ID=xxx
-FIREBASE_PRIVATE_KEY=xxx
-FIREBASE_CLIENT_EMAIL=xxx
-
-CLOUDINARY_CLOUD_NAME=xxx
-CLOUDINARY_API_KEY=xxx
-CLOUDINARY_API_SECRET=xxx
-
-VNP_TMN_CODE=xxx
-VNP_HASH_SECRET=xxx
-VNP_URL=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
-VNP_RETURN_URL=https://stock-photo-api.onrender.com/api/vnpay/return
-Frontend (.env)
-REACT_APP_API_URL=https://stock-photo-api.onrender.com/api
-🚀 Run Locally
-1️⃣ Clone project
-git clone https://github.com/NguyenDat004/ONLINE_STOCK_PHOTO.git
+git clone https://github.com/NguyenDat004/ONLINE_STOCK_PHOTO.git  
 cd ONLINE_STOCK_PHOTO
-2️⃣ Run Backend
-cd backend
-npm install
-npm start
-Server runs at:
 
-http://localhost:5000
-3️⃣ Run Frontend
-cd frontend
-npm install
-npm start
-App runs at:
+---
 
+## ▶️ Run Frontend
+
+cd client  
+npm install  
+npm start  
+
+Frontend runs at:  
 http://localhost:3000
-📌 API Endpoints Overview
-Auth
-POST /api/auth/login
-GET  /api/users/:email
-Photos
-GET    /api/photos
-GET    /api/photos/:id
-POST   /api/photos/upload
-DELETE /api/photos/:id
-Categories
-GET /api/categories
-Cart
-GET    /api/cart/:userId
-POST   /api/cart/add
-DELETE /api/cart/remove
-Payment
-POST /api/vnpay/create-payment
-GET  /api/vnpay/return
-📷 Screenshots (Add later)
-You can add screenshots here for:
 
-Home page
+---
 
-Photo detail
+## ▶️ Run Backend
 
-Admin dashboard
+cd server  
+npm install  
+npm run dev  
 
-Payment page
+Backend runs at:  
+http://localhost:5000
 
-🎯 Project Purpose
-This project was built as a graduation thesis and portfolio project to demonstrate full-stack development skills including:
+---
 
-REST API design
+## 🔐 Environment Variables (Backend)
 
-Authentication & authorization
+Create `.env` inside **server/** folder:
 
-Payment integration
+PORT=5000
 
-Cloud storage
+DATABASE_URL=your_postgresql_connection
 
-Deployment pipeline
+# Firebase Admin
+FIREBASE_PROJECT_ID=
+FIREBASE_CLIENT_EMAIL=
+FIREBASE_PRIVATE_KEY=
 
-👨‍🎓 Author
-Nguyen Dat
-Fullstack Developer (Fresher/Intern)
+# Cloudinary
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+# VNPay
+VNPAY_TMN_CODE=
+VNPAY_HASH_SECRET=
+VNPAY_URL=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+VNP_RETURN_URL=http://localhost:5000/api/vnpay/return
+
+---
+
+## 💳 VNPay Sandbox Test Card
+
+Bank: NCB  
+Card Number: 9704198526191432198  
+Name: NGUYEN VAN A  
+Expiry Date: 07/15  
+OTP: 123456  
+
+---
+
+## 🚀 Future Improvements
+
+- Email notifications after purchase  
+- Watermark preview before download  
+- Subscription plans for buyers  
+- Admin analytics dashboard  
+- Docker deployment  
+
+---
+
+## 👨‍💻 Author
+
+Nguyen Dat  
+Graduation Thesis Project – 2025
+
+---
+
+## ⭐ Support
+
+If you like this project, please give it a ⭐ on GitHub!
