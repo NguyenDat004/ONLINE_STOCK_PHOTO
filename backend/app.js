@@ -13,7 +13,7 @@ const admin = require("./config/firebase-admin"); // Firebase Admin SDK
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://stock-photo-online.vercel.app/api"
+    "https://stock-photo-online.vercel.app"
   ],
   credentials: true
 }));
