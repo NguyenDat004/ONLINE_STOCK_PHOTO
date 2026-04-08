@@ -1,70 +1,195 @@
-# Getting Started with Create React App
+📸 Online Stock Photo Ecommerce Website
+A full-stack web application that allows photographers to upload, sell and manage stock photos while customers can browse, purchase and download high-quality images.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🔗 Frontend: https://stock-photo-online.vercel.app/
+🔗 Backend API: https://stock-photo-api.onrender.com/
 
-## Available Scripts
+🧑‍💻 Tech Stack
+Frontend
+ReactJS (Create React App)
 
-In the project directory, you can run:
+React Router
 
-### `npm start`
+Bootstrap
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Axios
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Firebase Authentication
 
-### `npm test`
+Backend
+NodeJS + ExpressJS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+PostgreSQL (main database)
 
-### `npm run build`
+Cloudinary (image storage)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Firebase Admin SDK (auth verification)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+VNPay Sandbox (payment)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Deployment
+Frontend → Vercel
 
-### `npm run eject`
+Backend → Render
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Database → PostgreSQL Cloud
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+✨ Main Features
+👤 Authentication
+Register / Login with Firebase
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Google Login
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+JWT Token verification on backend
 
-## Learn More
+Auto create user in PostgreSQL after login
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+🖼 Photo Marketplace
+Users can:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Browse photos
 
-### Code Splitting
+Search & filter by category
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+View photo details
 
-### Analyzing the Bundle Size
+Add to cart
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Purchase photos
 
-### Making a Progressive Web App
+Download after payment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Photographers can:
 
-### Advanced Configuration
+Upload photos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Manage uploaded photos
 
-### Deployment
+View sales
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Admin can:
 
-### `npm run build` fails to minify
+Manage users
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Approve / delete photos
+
+Manage categories
+
+View transactions
+
+🛒 Shopping Cart & Checkout
+Add / remove photos from cart
+
+Checkout multiple photos
+
+Order history saved in database
+
+💳 VNPay Payment Integration
+Create payment URL from backend
+
+Redirect to VNPay Sandbox
+
+Verify return URL signature
+
+Save successful transactions
+
+☁️ Cloudinary Upload
+Images are uploaded to Cloudinary and only URLs are stored in PostgreSQL.
+
+🗄 Database Design
+Main tables:
+
+users
+
+photos
+
+categories
+
+cart
+
+transactions
+
+reviews
+
+⚙️ Environment Variables
+Backend (.env)
+PORT=5000
+DATABASE_URL=your_postgres_url
+
+FIREBASE_PROJECT_ID=xxx
+FIREBASE_PRIVATE_KEY=xxx
+FIREBASE_CLIENT_EMAIL=xxx
+
+CLOUDINARY_CLOUD_NAME=xxx
+CLOUDINARY_API_KEY=xxx
+CLOUDINARY_API_SECRET=xxx
+
+VNP_TMN_CODE=xxx
+VNP_HASH_SECRET=xxx
+VNP_URL=https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+VNP_RETURN_URL=https://stock-photo-api.onrender.com/api/vnpay/return
+Frontend (.env)
+REACT_APP_API_URL=https://stock-photo-api.onrender.com/api
+🚀 Run Locally
+1️⃣ Clone project
+git clone https://github.com/NguyenDat004/ONLINE_STOCK_PHOTO.git
+cd ONLINE_STOCK_PHOTO
+2️⃣ Run Backend
+cd backend
+npm install
+npm start
+Server runs at:
+
+http://localhost:5000
+3️⃣ Run Frontend
+cd frontend
+npm install
+npm start
+App runs at:
+
+http://localhost:3000
+📌 API Endpoints Overview
+Auth
+POST /api/auth/login
+GET  /api/users/:email
+Photos
+GET    /api/photos
+GET    /api/photos/:id
+POST   /api/photos/upload
+DELETE /api/photos/:id
+Categories
+GET /api/categories
+Cart
+GET    /api/cart/:userId
+POST   /api/cart/add
+DELETE /api/cart/remove
+Payment
+POST /api/vnpay/create-payment
+GET  /api/vnpay/return
+📷 Screenshots (Add later)
+You can add screenshots here for:
+
+Home page
+
+Photo detail
+
+Admin dashboard
+
+Payment page
+
+🎯 Project Purpose
+This project was built as a graduation thesis and portfolio project to demonstrate full-stack development skills including:
+
+REST API design
+
+Authentication & authorization
+
+Payment integration
+
+Cloud storage
+
+Deployment pipeline
+
+👨‍🎓 Author
+Nguyen Dat
+Fullstack Developer (Fresher/Intern)
